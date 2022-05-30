@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<title>ECサイト</title>
+	<script type="text/javascript">
+	function textCheck() {
+		//場所指定
+		let eUserName = document.getElementById('userName');
+		let ePassword = document.getElementById('password');
+		let eFullName = document.getElementById('fullName');
+		
+		//値(value)を獲得
+		let vUserName = eUserName.value;
+		let vPassword = ePassword.value;
+		let vFullName = eFullName.value;
+		
+		//獲得した内容を文字数に変える
+		let userNameLg = vUserName.length;
+		let passwordLg = vPassword.length;
+		let fullNameLg = vFullName.length;
+	
+		//文字数チェック
+		if (userNameLg >= 1 && userNameLg <= 25) {
+			if (passwordLg >= 1 && passwordLg <= 25) {
+				if (fullNameLg >= 1 && fullNameLg <= 25) {
+					return true;
+				}else {
+					alert('フルネームの文字数が指定範囲外です。');
+					return false;
+				}
+			}else {
+				alert('パスワードの文字数が指定範囲外です。');
+				return false;
+			}
+		}else {
+			alert('ユーザー名の文字数が指定範囲外です。');
+			return false;
+		}
+	}
+	</script>
+	
+</head>
+
+<body>
+
+	<header>
+		<h1>My EC Site</h1>
+	</header>
+	
+	<div id="adminPage">
+		<h2>新規ユーザー登録</h2>
+			<form name="addUserForm" id="addUserForm" method="post"
+				action="/ecsite/admin/addUser" th:action="@{/ecsite/admin/addUser}"
+				onSubmit="return textCheck()">
+				<p>ユーザー名:<input type="text" placeholder="1文字以上25文字以下" name="userName" id="userName"/></p>
+				<p>パスワード :<input type="text" placeholder="1文字以上25文字以下" name="password" id="password"/></p>
+				<p>フルネーム :<input type="text" placeholder="1文字以上50文字以下" name="fullName" id="fullName"/></p>
+				<button type="submit" id="addUserBtn">登録</button>
+			</form>
+	</div>
+</body>
+</html>
